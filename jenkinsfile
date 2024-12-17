@@ -1,14 +1,11 @@
 pipeline {
     agent any 
-
-       
-
     stages {
         stage('Install Dependencies') {
             steps {
                 script {
-                    
-                    sh 'npm ci'
+
+                    bat 'npm install'
                 }
             }
         }
@@ -16,8 +13,8 @@ pipeline {
         stage('Run Tests') {
             steps {
                 script {
-                 
-                    sh 'npm run cy:run'
+
+                    bat 'npx cypress run'
                 }
             }
         }
@@ -25,13 +22,13 @@ pipeline {
         stage('Generate Report') {
             steps {
                 script {
-                    sh 'node cucumber-report-generator.js'
-                
+                    bat 'node cucumber-report-generator.js'
+
                 }
             }
         }
 
-        
+
     }
 
     post {
@@ -39,9 +36,10 @@ pipeline {
           script {
             echo 'Les artifacts'
 
-            archiveArtifacts artifacts: '**/*.reports', allowEmptyArchive: true
+            archiveArtifacts artifacts: '*/.reports', allowEmptyArchive: true
 
           }
         }
     }
 }
+
