@@ -1,9 +1,7 @@
 pipeline {
-    agent any {
-        docker {
-            image 'cypress/browsers'
-            }
-        }
+    agent any 
+
+       
 
     stages {
         stage('Install Dependencies') {
