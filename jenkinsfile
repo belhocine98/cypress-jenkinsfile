@@ -17,7 +17,7 @@ pipeline {
             steps {
                 script {
                  
-                    sh 'npx cypress run'
+                    sh 'npm run cy:run'
                 }
             }
         }
