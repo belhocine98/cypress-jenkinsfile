@@ -11,7 +11,7 @@ When('je rentre le username correct', () => {
     loginPage.elements.username("Admin");
 });
 
-When('je rentre le password correct', () => {
+When('password correct', () => {
     loginPage.elements.password('admin123');
 });
 
@@ -19,7 +19,7 @@ When('je clique sur le bouton login', () => {
     loginPage.elements.boutonLogin().click();
 });
 
-Then('je suis redirigé vers le dashboard', () => {
+Then('je suis sur le dashbord', () => {
    
     dashboard.Dashboard.should('be.visible').and('contain.text', 'Dashboard');
 });
