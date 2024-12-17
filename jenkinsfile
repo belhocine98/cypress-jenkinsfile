@@ -1,6 +1,8 @@
 pipeline {
     agent{
-        image 'cypress/browsers'
+        docker {
+            image 'cypress/browsers'
+            }
     }
 
     stages {
