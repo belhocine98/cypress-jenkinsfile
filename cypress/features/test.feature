@@ -1,13 +1,12 @@
 Feature: test1
 
-  @regression
-  Scenario: scene1
-  
-    Given je suis ici
-    Then je suis content
-
   @smoke
-  Scenario: scene2
+  Scenario: Login sur orangeHRM
   
-    Given je suis ici2
-    Then je suis content3
+    Given je suis sur la page orangeHRM
+    When je rentre le username correct
+    And password correct
+    And je clique sur le bouton login
+    Then je suis sur le dashbord
+
+

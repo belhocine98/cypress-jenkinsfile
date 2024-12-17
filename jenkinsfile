@@ -1,0 +1,45 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('Install Dependencies') {
+            steps {
+                script {
+                    
+                    bat 'npm install'
+                }
+            }
+        }
+
+        stage('Run Tests') {
+            steps {
+                script {
+                 
+                    bat 'npx cypress run'
+                }
+            }
+        }
+
+        stage('Generate Report') {
+            steps {
+                script {
+                    bat 'node cucumber-report-generator.js'
+                
+                }
+            }
+        }
+
+        
+    }
+
+    post {
+        always {
+          script {
+            echo 'Les artifacts'
+
+            archiveArtifacts artifacts: '**/*.reports', allowEmptyArchive: true
+
+          }
+        }
+    }
+}

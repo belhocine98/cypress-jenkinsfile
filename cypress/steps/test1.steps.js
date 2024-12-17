@@ -1,27 +1,28 @@
-
 /// <reference types="cypress" />
 
-import { Given, When } from "cypress-cucumber-preprocessor/steps";
-Given("je suis ici",  () => {
-    assert.equal("a", "a");
-})
+import loginPage from "../pages/login.page";
+import dashboard from "../pages/dashboard";
 
-Then('je suis content', () => {
-  // Write code here that turns the phrase above into concrete actions
-  assert.equal("a", "b");
-})
+Given('je suis sur la page orangeHRM', () => {
+    cy.visit('https://opensource-demo.orangehrmlive.com/web/index.php/auth/login');
+});
 
+When('je rentre le username correct', () => {
+    loginPage.elements.username("Admin");
+});
 
+When('je rentre le password correct', () => {
+    loginPage.elements.password('admin123');
+});
 
-Given('je suis ici2', () => {
-  // Write code here that turns the phrase above into concrete actions
-   assert.equal("a", "a");
-})
+When('je clique sur le bouton login', () => {
+    loginPage.elements.boutonLogin().click();
+});
 
-Then('je suis content3', () => {
-  // Write code here that turns the phrase above into concrete actions
-   assert.equal("a", "a");
-})
+Then('je suis redirigé vers le dashboard', () => {
+   
+    dashboard.Dashboard.should('be.visible').and('contain.text', 'Dashboard');
+});
 
 
 
