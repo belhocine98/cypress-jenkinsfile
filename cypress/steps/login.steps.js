@@ -24,5 +24,13 @@
   });
 
 
+When('I log in with username {string} and password {string}', (s, s2) => {
+  // Write code here that turns the phrase above into concrete actions
+})
+
+Given('I am on the OrangeHRM login page', () => {
+  // Write code here that turns the phrase above into concrete actions
+})
+
 
 
