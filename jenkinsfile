@@ -5,6 +5,9 @@ pipeline {
             image 'cypress/browsers'
         }
     }
+    triggers{
+        cron(H/3 * * * *)
+    }
     parameters {
         
 
