@@ -23,15 +23,6 @@ pipeline {
             }
         }
 
-        stage('Generate Report') {
-            steps {
-                script {
-                    sh 'node cucumber-report-generator.js'
-
-                }
-            }
-        }
-
 
     }
 
@@ -39,8 +30,9 @@ pipeline {
         always {
           script {
             echo 'Les artifacts'
+             sh 'node cucumber-report-generator.js'
 
-            archiveArtifacts artifacts: '*/.reports', allowEmptyArchive: true
+            archiveArtifacts artifacts: '**/rapports', allowEmptyArchive: true
 
           }
         }
