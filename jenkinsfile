@@ -1,11 +1,15 @@
 pipeline {
-    agent any 
+    agent {
+        docker{
+            image 'cypress/browser'
+        }
+    }
     stages {
         stage('Install Dependencies') {
             steps {
                 script {
 
-                    bat 'npm install'
+                    sh 'npm ci'
                 }
             }
         }
@@ -14,7 +18,7 @@ pipeline {
             steps {
                 script {
 
-                    bat 'npx cypress run'
+                    sh 'npx cypress run'
                 }
             }
         }
@@ -22,7 +26,7 @@ pipeline {
         stage('Generate Report') {
             steps {
                 script {
-                    bat 'node cucumber-report-generator.js'
+                    sh 'node cucumber-report-generator.js'
 
                 }
             }
