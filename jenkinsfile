@@ -32,7 +32,7 @@ pipeline {
             echo 'Les artifacts'
              sh 'node cucumber-report-generator.js'
 
-            archiveArtifacts artifacts: '**/rapports', allowEmptyArchive: true
+            archiveArtifacts artifacts: 'rapports/**/*', allowEmptyArchive: true
 
           }
         }
