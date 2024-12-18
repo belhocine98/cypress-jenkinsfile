@@ -1,29 +1,27 @@
 /// <reference types="cypress" />
 
-import loginPage from "../pages/login.page";
-import dashboard from "../pages/dashboard";
-
-Given('je suis sur la page orangeHRM', () => {
-    cy.visit('https://opensource-demo.orangehrmlive.com/web/index.php/auth/login');
-});
-
-When('je rentre le username correct', () => {
-    loginPage.elements.username("Admin");
-});
-
-When('password correct', () => {
-    loginPage.elements.password('admin123');
-});
-
-When('je clique sur le bouton login', () => {
-    loginPage.elements.boutonLogin().click();
-});
-
-Then('je suis sur le dashbord', () => {
-   
-    dashboard.Dashboard.should('be.visible').and('contain.text', 'Dashboard');
-});
-
+  import { Given, When, Then } from 'cypress-cucumber-preprocessor/steps';
+  import { LoginOrangeRMHPage } from '../pages/login.page';
+  
+  const loginPage = new LoginOrangeRMHPage();
+  
+  Given('I am on the OrangeHRM login page', () => {
+    loginPage.visit();
+  });
+  
+  When('I log in with username {string} and password {string}', (username, password) => {
+    loginPage.enterUsername(username);
+    loginPage.enterPassword(password);
+    loginPage.submit();
+  });
+  
+  Then('I should see the dashboard with header {string}', (headerText) => {
+    loginPage.verifyDashboardHeader(headerText);
+  });
+  
+  Then('I should see an alert message {string}', (message) => {
+    loginPage.verifyAlertMessage(message);
+  });
 
 
 

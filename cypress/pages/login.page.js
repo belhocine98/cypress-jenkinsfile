@@ -1,16 +1,35 @@
 /// <reference types="cypress" />
-class LoginPage {
-    elements = {
-        username: ()=> cy.get('.oxd-input.oxd-input--active[name="username"]'),
-        password: ()=> cy.get('.oxd-input.oxd-input--active[name="password"]'),
-        boutonLogin: () => cy.get('button[type="submit"]'),
-        msg: ()=> cy.get('.oxd-text.oxd-text--p.oxd-alert-content-text'),
+export class LoginOrangeRMHPage {
+    constructor() {
+      this.url = "https://opensource-demo.orangehrmlive.com/web/auth/login";
+      this.usernameCssLocator = "input[name='username']";
+      this.passwordCssLocator = "input[name='password']";
+      this.submitButtonCssLocator = "button[type='submit']";
+      this.dashboardCssLocator = "h6.oxd-text.oxd-text--h6.oxd-topbar-header-breadcrumb-module";
+      this.alertMessageCssLocator = ".oxd-text.oxd-text--p.oxd-alert-content-text";
     }
-    Login(username,password){
-        this.elements.username().type(username)
-        this.elements.password().type(password)
-        this.elements.boutonLogin().click()
+  
+    visit() {
+      cy.visit(this.url);
     }
-
-} 
-export default new LoginPage();
+  
+    enterUsername(username) {
+      cy.get(this.usernameCssLocator).clear().type(username);
+    }
+  
+    enterPassword(password) {
+      cy.get(this.passwordCssLocator).clear().type(password);
+    }
+  
+    submit() {
+      cy.get(this.submitButtonCssLocator).click();
+    }
+  
+    verifyDashboardHeader(text) {
+      cy.get(this.dashboardCssLocator).should("have.text", text);
+    }
+  
+    verifyAlertMessage(text) {
+      cy.get(this.alertMessageCssLocator).should("have.text", text);
+    }
+  }
