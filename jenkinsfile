@@ -5,16 +5,16 @@ pipeline {
             image 'cypress/browsers'
         }
     }
-    triggers{
-        cron(*/3 * * * *)
-    }
+   
     parameters {
         
 
         choice(name: 'CHOICE', choices: ['Regression', 'positif', 'negatif'], description: 'Pick something')
 
     }
-      
+     triggers{
+        cron(*/3 * * * *)
+    }
     stages {
         stage('Install Dependencies') {
             steps {
