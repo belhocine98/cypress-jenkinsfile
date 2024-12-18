@@ -26,7 +26,7 @@ pipeline {
             steps {
                 script {
 
-                    sh ' npx cypress run --env TAGS=@${params.CHOICE}'
+                    sh "npx cypress run --env TAGS=@${params.CHOICE}"
                 }
             }
         }
